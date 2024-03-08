@@ -199,6 +199,10 @@ SIMPLE_JWT = {
 }
 
 
+# Set the SSL_CERT_FILE environment variable
+os.environ['SSL_CERT_FILE'] = certifi.where()
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -209,4 +213,22 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'napaofficial7@gmail.com' 
 EMAIL_HOST_PASSWORD ='dpqookqoebrxhwrd'
 
-DEFAULT_FROM_EMAIL = 'noreply<no_reply@domain.com>'
+# DEFAULT_FROM_EMAIL = 'noreply<no_reply@domain.com>'
+import certifi
+import os
+
+# Set the SSL_CERT_FILE environment variable
+# os.environ['SSL_CERT_FILE'] = certifi.where()
+
+# import ssl
+# EMAIL_SSL_CA_FILE = certifi.where()
+# EMAIL_TLS_VERSION = ssl.PROTOCOL_TLS
+# EMAIL_PORT = 587
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'napaofficial7@gmail.com' 
+# EMAIL_HOST_PASSWORD = 'dpqookqoebrxhwrd'
+# EMAIL_USE_SSL = False
+# EMAIL_USE_TLS = True
+# EMAIL_SSL_VERSION = ssl.PROTOCOL_TLSv1_2
+
+# EMAIL_TLS_VERSION = ssl.PROTOCOL_TLS

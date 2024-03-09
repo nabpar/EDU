@@ -2,6 +2,7 @@ from django.db import models
 
 from admins.models import Category
 from django.utils.text import slugify
+
 from tinymce.models import HTMLField   # this is  for tinymce
 
 # Create your models here.

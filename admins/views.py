@@ -8,6 +8,7 @@ from rest_framework.filters import SearchFilter,OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .file_upload import Uploader
 from django.views.decorators.clickjacking import xframe_options_exempt
+from EduAid.pagination import MyPageNumberPagination
 
 # Create your views here.
 
@@ -32,6 +33,7 @@ class List_Category_view(generics.ListAPIView):
     serializer_class = Category_Serializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     search_fields = ["name"]
+    pagination_class = MyPageNumberPagination
 
 
 
@@ -52,11 +54,13 @@ class Create_Subject_View(generics.CreateAPIView):
 class Get_Subject_View(generics.RetrieveAPIView):
     queryset=Subject.objects.all()
     serializer_class=Subject_Serializer
+    pagination_class = MyPageNumberPagination
 
 class List_Subject_view(generics.ListAPIView):
     queryset = Subject.objects.all()
     serializer_class = Subject_Serializer
     filterset_fields = ('category','name')
+    pagination_class = MyPageNumberPagination
 
 
 
@@ -121,6 +125,7 @@ class List_Syllabus_view(generics.ListAPIView):
     queryset= Syllabus.objects.all()
     serializer_class =Syllabus_Serializer
     filterset_fields = ('subject',)
+    pagination_class = MyPageNumberPagination
 
 class Update_Syllabus_View(generics.UpdateAPIView):
     queryset = Syllabus.objects.all()    

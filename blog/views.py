@@ -6,9 +6,10 @@ from rest_framework import generics
 from .models import Blog, Comment
 from .serializer import Blog_Serializer, Comment_serializer,Search_Serializer
 from rest_framework import filters
-from django_filters.rest_framework import DjangoFilterBackend
+# from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from django.db.models import Case, When, Value, CharField
+from EduAid.pagination import MyPageNumberPagination
 
 # Create your views here
 
@@ -77,9 +78,11 @@ class SearchList(generics.ListAPIView):
 class View_Blog(generics.ListAPIView):
     queryset = Blog.objects.all()
     serializer_class = Blog_Serializer
+    pagination_class = MyPageNumberPagination
  
 class Retrieve_Blog(generics.RetrieveAPIView):
     queryset=Blog.objects.all()
+    pagination_class = MyPageNumberPagination
 
 
 class Create_Blog(generics.CreateAPIView):

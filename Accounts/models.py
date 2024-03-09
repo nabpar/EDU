@@ -47,7 +47,9 @@ class User(AbstractBaseUser):
 
     class Roles(models.TextChoices):
         STUDENT='STUDENT'
+        TEACHER = 'TEACHER'
         ADMIN='ADMIN'
+
 
     email = models.EmailField(
         verbose_name="email address",

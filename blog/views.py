@@ -103,9 +103,11 @@ class Destroy_Blog(generics.DestroyAPIView):
 # For Resource Uploader
 
 
-class Create_Comment(generics.CreateAPIView):
-    queryset = Comment.objects.all()
+class Create_Comment(generics.ListCreateAPIView):
+    queryset = Comment.objects.all().order_by('-date_added')
     serializer_class = Comment_serializer
+    filterset_fields = ('post',)
+
 
 
 class Update_Comment(generics.UpdateAPIView):

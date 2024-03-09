@@ -100,27 +100,57 @@ class PasswordResetSerializer(serializers.Serializer):
         if User.objects.filter(email=email).exists():
             user = User.objects.get(email=email)
             uid = urlsafe_base64_encode(force_bytes(user.id))
-            print("encoded UID:", uid)
             token = PasswordResetTokenGenerator().make_token(user)
-            print("password reset token:", token)
-            link = "http://localhost:3000/api/user/reset/" + uid + "/" + token
-            print("password reset link:", link)
-             # Construct the reset link
-                # sending the mail to the user to change the password
-            body = "Click the following link to change the password" +"/"+ link
-            data = {
-                "subject": "Rest Your Password",
-                "body": body,
-                "to_email": user.email,
-            }
+            domain=settings.FRONTEND_DOMAIN.rstrip('/')
+            reset_link=f'{domain}/{settings.REST_PASSWORD_ENDPOINT}/{uid}/{token}'
+            # link = "http://localhost:3000/api/user/reset/" + uid + "/" + token
+            #  Construct the reset link
+        
+            user.save()
+            
+            uid=urlsafe_base64_encode(force_bytes(user.id)) 
+            send_mail(
+                "testing",
+                "Here is the message.",
+                "napaofficial7@gmail.com",
+                ["napaofficial7@gmail.com"],
+                fail_silently=False,)
+            body = f"""
+                Click the link to reset your password:
+
+                {reset_link}
+            """
+            data = {"subject": "EduAid: Reset Password", "body": body, "to_email": user.email}
             Util.send_email(data)
+            # Util.send_email(data)
+              # Send email with the reset link
+          
+
             return attrs
         else:
-            raise serializers.ValidationError("Your Email not found")
+            raise serializers.ValidationError("You are not a registered error")
+            # raise serializers.ValidationError("you are not a registered error")
+
+        # from django.core.mail import send_mail
+
+
+
 
     def get_reset_link(elf,uid,token):
         # Construct the password reset link
             return f"http://localhost:3000/api/user/reset/{uid}/{token}"
+
+
+    # def send_reset_email(self,to_email,reset_link):
+    #         # Send the password reset email
+    #         subject = "Password Reset"
+    #         message = f"Click the following link to reset your password:\n{reset_link}"
+    #         from_email = "naparajuli11@gmail.com"  # Replace with your email
+    #         recipient_list = [to_email]
+    #         send_mail(subject, message, from_email, recipient_list)    
+
+
+
 
 
 

@@ -50,7 +50,6 @@ class User(AbstractBaseUser):
         TEACHER = 'TEACHER'
         ADMIN='ADMIN'
 
-
     email = models.EmailField(
         verbose_name="email address",
         max_length=255,

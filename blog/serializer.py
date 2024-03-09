@@ -23,4 +23,4 @@ class Blog_Serializer(serializers.ModelSerializer):
 class Comment_serializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ["comment"]
+        fields='__all__'
